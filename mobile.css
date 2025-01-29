@@ -1,0 +1,138 @@
+.button-menu{
+    border: 0;
+    background-color: transparent;
+    margin: 0;
+    padding: 20px;
+    padding-bottom: 0;
+    color: #363636;
+    float: left;
+    position: fixed;
+    top: 7.5px;
+  }
+body {
+    margin: 0;
+}
+.top {
+    height: 55px;
+    width: auto;
+    padding: 7.5px;
+    text-align: center;
+    
+}
+.logo {
+    display: inline-block;
+    height: 40px;
+    width: 80px;
+    padding: 9px;
+    font-size: 30px;
+}
+ul.m {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+    margin: 10;
+}
+ul {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+}
+#m1, #m2, #m3, #m4 {
+    display: none;
+}
+#detail-menu {
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 22.5px;
+    font-weight: 700;
+    padding: 0;
+}
+ul.m > li {
+    padding-top: 15px;
+    padding-bottom: 0px;
+}
+a {
+    text-decoration: none;
+    color: black;
+    background-color: transparent;
+}
+a:active, a:hover {
+    text-decoration: none;
+    color: black;
+    background-color: transparent;
+}
+#detail-menu::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border: 2px solid rgb(0, 0, 0);
+    margin-bottom: 4px;
+    border-top: 0;
+    border-right: 0;
+    transform: rotate(-45deg) translateY(180%);
+    transform-origin: 25% 25%;
+    position: absolute;
+}
+p {
+    height: 15px;
+    margin: 0px;
+    border-bottom : 1px solid #d4d4d4;
+}
+.line {
+    height: 1px;
+}
+#m1 > li, #m2 > li, #m3 > li, #m4 > li{
+    font-size: 20px;
+    font-weight: 600;
+    margin: 15px;
+}
+#plain {
+    padding-left:20px ;
+    width:60vw;
+    padding-right:20px ;
+}
+.menu {
+    margin-right: 0px;
+    position: fixed;
+    background-color: white;
+    height: 120%;
+    top: 0px;
+    padding-top: 50px;
+    z-index: 10;
+}
+#body {
+    margin: 20px;
+}
+body{
+  font-family: "Noto Sans KR", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+#container {
+    text-align: center;
+    font-size: 25px;
+}
+#dat {
+    text-align: center;
+    font-size: 30px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    margin-top: 40px;
+    border-bottom : 1px solid #d4d4d4;
+}
+#set {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+}
+form {
+    margin-top: 50px;
+}
+#ndetail-menu {
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 22.5px;
+    font-weight: 700;
+    padding: 0;
+}

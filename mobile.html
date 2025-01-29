@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <script src="mobile.js"></script>
+    <link rel="stylesheet" href="mobile.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="header">
+        <div class="top">
+        <div class="logo">급식</div>
+
+</div>
+</div>
+<div class="menu">
+     <button type="button" class="button-menu" onclick="
+            menu(plain)
+        ">
+        
+        <svg xmlns="//www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+          <path fill="#333" fill-rule="evenodd" d="M0 0h25v2H0V0zm0 9h25v2H0V6zm0 9h25v2H0v-2z"></path>
+        </svg>
+      </button>
+    <div id="plain" style="display: none">
+      <ul class="m">
+        <li>
+          <a href="./mobile.html" id="ndetail-menu" class="d1">급식</a>
+          <p></p>
+          <ul id="m1">
+          </ul>
+        </li>
+        <li class="second">
+          <a id="detail-menu" class="d2" onclick="menu(m2);">제작중</a><p></p>
+          <ul id="m2">
+            <li><a href=#>제작중</a></li>
+            <li><a href=#>제작중</a></li>
+            <li><a href=#>제작중</a></li>
+            <li><a href=#>제작중</a></li>
+          </ul>
+        </li>
+        <li>
+          <a id="detail-menu" class="d3" onclick="menu(m3);">제작중</a><p></p>
+          <ul id="m3">
+            <li><a href=#>제작중</a></li>
+            <li><a href=#>제작중</a></li>
+            <li><a href=#>제작중</a></li>
+            <li><a href=#>제작중</a></li>
+          </ul>
+        </li>
+        <li class="second">
+          <a id="detail-menu" class="d4" onclick="menu(m4);">제작중</a><p></p>
+          <ul id="m4">
+            <li><a href=#>제작중</a></li>
+            <li><a href=#>제작중</a></li>
+            <li><a href=#>제작중</a></li>
+            <li><a href=#>제작중</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+</div>
+<div id="body">
+  <div id="dat">날짜를 불러 올 수 없습니다.
+  </div>
+  <div id="container">급식 정보가 없습니다.
+  </div>
+  <div id="set">
+    <form action="javascript:setdate()" method="post">
+  <label for="date">날짜 바로가기</label>
+  <input type="date" id="date" max="9999-12-31">
+    <input type="submit" value="확인">
+</form></div>
+  <script>document.querySelector("#dat").innerHTML = String(year) + '년 ' + String(month) + '월 ' + String(date) + '일'</script>
+</div>
+</body>
+</html>
