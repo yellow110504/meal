@@ -33,6 +33,7 @@ function formatApiDate(date) {
 function cleanMealName(mealName) {
     return String(mealName || "")
         .replace(/"/g, "")
+        .replace(/\//g, "")
         .replace(/'/g, "");
 }
 
