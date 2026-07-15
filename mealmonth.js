@@ -53,7 +53,7 @@ function cleanMealItem(value) {
          * 메뉴 이름의 일반 괄호는 유지
          */
         .replace(/\(\s*\d+(?:\.\d+)*\.?\s*\)/g, "")
-        .replace(/(구로)/g, "")
+        .replace(/\(구로\)/g, "")
         .replace(/['"]/g, "")
         .replace(/\s+/g, " ")
         .replace(/\//g, "")
