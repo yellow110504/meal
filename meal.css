@@ -1,0 +1,623 @@
+/* =========================================
+   급식 페이지 전용 CSS
+   모바일 우선
+========================================= */
+
+:root {
+    --meal-page-bg: #f6f7f8;
+    --meal-surface: #ffffff;
+    --meal-surface-pressed: #f4f4f4;
+
+    --meal-text: #191919;
+    --meal-text-sub: #6b6b6b;
+    --meal-text-light: #999999;
+
+    --meal-border: #e8e8e8;
+    --meal-border-strong: #dddddd;
+
+    --meal-dark: #202020;
+        --page-side-space: 20px;
+    --page-max-width: 452px;
+}
+
+/* 기본 */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--meal-page-bg);
+    color: var(--meal-text);
+    font-family: "Noto Sans KR", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+.meal-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--meal-page-bg);
+}
+
+/* =========================================
+   상단 앱바
+========================================= */
+
+
+
+.meal-appbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    width: calc(100% - (var(--page-side-space) * 2));
+    max-width: var(--page-max-width);
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.meal-appbar h1 {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.6px;
+}
+
+.meal-appbar {
+    width: 100%;
+    height: 60px;
+    background: #252525;
+    border-bottom: 1px solid #303030;
+}
+
+#mov {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 58px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+
+    border: 1px solid #484848;
+    border-radius: 8px;
+    background: #323232;
+
+    color: #f4f4f4;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.2px;
+    text-decoration: none;
+
+    box-shadow: none;
+}
+
+#mov:active {
+    border-color: #5a5a5a;
+    background: #3d3d3d;
+    transform: scale(0.97);
+}
+/* 본문도 상단과 같은 좌우 기준선 사용 */
+
+#body.meal-page {
+    width: calc(100% - (var(--page-side-space) * 2));
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@media (max-width: 360px) {
+    .meal-appbar-inner {
+        padding: 0 16px;
+    }
+
+    #mov {
+        width: 56px;
+        height: 31px;
+        font-size: 11.5px;
+    }
+}
+/* 날짜 이동 버튼 */
+
+.meal-date-navigation #date1,
+.meal-date-navigation #date2 {
+    position: static !important;
+    inset: auto !important;
+    float: none !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px !important;
+    height: 42px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+    border-radius: 10px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition:
+        background-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.meal-date-navigation #date1:active,
+.meal-date-navigation #date2:active {
+    background: #eaeae7 !important;
+    transform: scale(0.94);
+}
+
+
+/* 폰트 문자가 아닌 CSS 화살표 */
+
+.date-arrow {
+    display: block;
+
+    width: 9px;
+    height: 9px;
+
+    border-top: 2px solid #353532;
+    border-right: 2px solid #353532;
+}
+
+.date-arrow-left {
+    margin-left: 4px;
+    transform: rotate(-135deg);
+}
+
+.date-arrow-right {
+    margin-right: 4px;
+    transform: rotate(45deg);
+}
+
+/* =========================================
+   본문
+========================================= */
+
+#body,
+#body * {
+    box-sizing: border-box;
+}
+
+#body.meal-page {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+
+    padding:
+        18px
+        14px
+        calc(30px + env(safe-area-inset-bottom));
+}
+
+/* =========================================
+   날짜 이동
+========================================= */
+
+.meal-date-navigation {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    align-items: center;
+    gap: 8px;
+
+    width: 100%;
+    min-height: 64px;
+}
+
+/* 기존 버튼 CSS 강제 해제 */
+
+.meal-date-navigation #date1,
+.meal-date-navigation #date2 {
+    position: static !important;
+    inset: auto !important;
+    float: none !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 1px solid var(--meal-border-strong) !important;
+    border-radius: 50% !important;
+    background: var(--meal-surface) !important;
+    box-shadow: none !important;
+
+    color: #323232 !important;
+
+    font-size: 27px !important;
+    font-weight: 400 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition:
+        background-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.meal-date-navigation #date1:active,
+.meal-date-navigation #date2:active {
+    background: var(--meal-surface-pressed) !important;
+    transform: scale(0.94);
+}
+
+/* 현재 날짜 */
+
+.meal-current-date {
+    min-width: 0;
+    text-align: center;
+}
+
+.meal-current-date > span {
+    display: block;
+    margin-bottom: 3px;
+
+    color: var(--meal-text-light);
+
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.2px;
+}
+
+#dat {
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+
+    color: var(--meal-text);
+
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.7px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* =========================================
+   급식 정보
+========================================= */
+
+.meal-content {
+    overflow: hidden;
+
+    width: 100%;
+
+    border: 1px solid var(--meal-border);
+    border-radius: 15px;
+    background: var(--meal-surface);
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.035);
+}
+
+.meal-content-header {
+    display: flex;
+    align-items: center;
+
+    min-height: 54px;
+    padding: 0 18px;
+
+    border-bottom: 1px solid var(--meal-border);
+}
+
+.meal-content-header h2 {
+    margin: 0;
+
+    color: var(--meal-text);
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+}
+
+/* 실제 급식 메뉴 */
+
+#container {
+    display: block;
+
+    width: 100%;
+    min-height: 280px;
+    margin: 0;
+    padding: 24px 20px 30px;
+
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+
+    color: #252525;
+
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.95;
+    letter-spacing: -0.45px;
+    text-align: left;
+
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
+/* =========================================
+   다른 날짜 선택
+========================================= */
+
+#set.meal-date-picker {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    width: 100%;
+    min-height: 66px;
+    margin: 0;
+    padding: 11px 14px;
+
+    border: 1px solid var(--meal-border);
+    border-radius: 13px;
+    background: var(--meal-surface);
+}
+
+#set.meal-date-picker label {
+    flex-shrink: 0;
+
+    margin: 0;
+    padding: 0;
+
+    color: #3e3e3e;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.35px;
+}
+
+#date {
+    flex: 1;
+
+    width: auto;
+    min-width: 0;
+    height: 42px;
+    margin: 0;
+    padding: 0 10px;
+
+    border: 1px solid var(--meal-border-strong);
+    border-radius: 9px;
+    outline: none;
+
+    background: #fafafa;
+    color: var(--meal-text);
+
+    font-size: 13px;
+    font-weight: 500;
+
+    transition:
+        border-color 0.15s ease,
+        background-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+#date:focus {
+    border-color: #747474;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+/* =========================================
+   작은 휴대폰
+========================================= */
+
+
+/* =========================================
+   넓은 화면
+========================================= */
+
+
+/* =========================================
+   절제된 디자이너 블랙
+========================================= */
+
+:root {
+    --designer-black: #242422;
+    --designer-black-soft: #343431;
+    --designer-gray: #6f6f6a;
+    --designer-line: #e6e6e2;
+    --designer-bg: #f7f7f5;
+}
+
+/* 전체 배경 */
+
+body,
+.meal-screen {
+    background: var(--designer-bg);
+}
+
+/* 상단 앱바: 순수 검정 대신 차콜 */
+
+.meal-appbar {
+    height: 60px;
+    border-bottom: 0;
+    background: var(--designer-black);
+}
+
+.meal-appbar h1 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+}
+
+/* 월간 버튼 */
+
+#mov {
+    min-width: 56px;
+    height: 34px;
+
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.9);
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+#mov:active {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+/* 날짜 이동 버튼은 검은 면 대신 흰색 버튼 */
+
+.meal-date-navigation #date1,
+.meal-date-navigation #date2 {
+    border: 1px solid #d8d8d4 !important;
+    background: #ffffff !important;
+    color: var(--designer-black) !important;
+
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.035) !important;
+}
+
+.meal-date-navigation #date1:active,
+.meal-date-navigation #date2:active {
+    background: #eeeeeb !important;
+}
+
+/* 날짜 */
+
+#dat {
+    color: var(--designer-black);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* 급식 카드 */
+
+.meal-content {
+    border: 1px solid var(--designer-line);
+    background: #ffffff;
+
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.02),
+        0 8px 22px rgba(0, 0, 0, 0.04);
+}
+
+/* 카드 제목은 검은 배경을 쓰지 않음 */
+
+.meal-content-header {
+    position: relative;
+
+    min-height: 58px;
+    padding: 0 18px;
+
+    border-bottom: 1px solid var(--designer-line);
+    background: #ffffff;
+}
+
+/* 작은 차콜 포인트선 */
+
+.meal-content-header::before {
+    content: "";
+
+    width: 4px;
+    height: 18px;
+    margin-right: 10px;
+
+    border-radius: 2px;
+    background: var(--designer-black);
+}
+
+.meal-content-header h2 {
+    color: var(--designer-black);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* 실제 급식 메뉴 */
+
+#container {
+    background: #ffffff;
+    color: #292927;
+
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.95;
+}
+
+/* 날짜 선택 */
+
+#set.meal-date-picker {
+    border: 1px solid var(--designer-line);
+    background: #ffffff;
+}
+
+#set.meal-date-picker label {
+    color: var(--designer-black);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#date {
+    border: 1px solid #d9d9d5;
+    background: #f8f8f6;
+    color: var(--designer-black);
+}
+
+#date:focus {
+    border-color: var(--designer-black-soft);
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(36, 36, 34, 0.07);
+}
+
+.meal-content,
+.calendar-panel {
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+}

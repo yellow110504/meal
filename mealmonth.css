@@ -1,0 +1,815 @@
+/* =========================================
+   월간 급식 페이지 전체 CSS
+
+   기준 화면 폭: 500px
+   기준 콘텐츠 폭: 452px
+
+   달력 내부의 높이·폰트·간격은
+   콘텐츠 폭에 따라 같은 비율로 축소됩니다.
+
+   하루 버튼: 60 × 36px 고정
+   날짜 버튼: 44 × 44px 고정
+   화살표 아이콘: 24 × 24px 고정
+========================================= */
+
+:root {
+    --meal-page-bg: #f7f7f5;
+
+    --meal-surface: #ffffff;
+    --meal-surface-soft: #fafaf8;
+    --meal-surface-pressed: #eeeeeb;
+
+    --meal-text: #242422;
+    --meal-text-sub: #5d5d59;
+    --meal-text-light: #969691;
+
+    --meal-line: #e6e6e2;
+    --meal-line-soft: #eeeeea;
+    --meal-line-strong: #d8d8d4;
+
+    --meal-dark: #242422;
+    --meal-dark-soft: #343431;
+
+    /*
+       500px 화면에서 452px
+       400px 화면에서 361.6px
+       360px 화면에서 325.44px
+    */
+    --meal-content-max: 452px;
+}
+
+
+/* =========================================
+   기본 초기화
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body {
+    background: var(--meal-page-bg);
+    color: var(--meal-text);
+
+    font-family: "Noto Sans KR", sans-serif;
+    word-break: keep-all;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    color: inherit;
+}
+
+.background,
+.meal-screen {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    background: var(--meal-page-bg);
+}
+
+
+/* =========================================
+   상단 앱바
+========================================= */
+
+.meal-appbar {
+    width: 100%;
+    height: 60px;
+
+    margin: 0;
+
+    border: 0;
+    background: var(--meal-dark);
+}
+
+.meal-appbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* 본문이 최대폭 452px에 도달하는 구간 */
+@media (min-width: 480px) {
+    .meal-appbar-inner {
+        width: 452px;
+        max-width: 452px;
+        padding: 0;
+    }
+}
+.meal-appbar-inner,
+#body,
+#body.meal-page {
+    width: calc(100% - (var(--meal-side-space) * 2));
+    max-width: var(--meal-content-max);
+    margin-left: auto;
+    margin-right: auto;
+}
+.meal-appbar h1 {
+    flex: 1;
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.6px;
+}
+
+
+/* =========================================
+   하루 보기 버튼
+   60 × 36px 고정
+========================================= */
+
+#mov {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 60px;
+
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+
+    height: 36px;
+    min-height: 36px;
+    max-height: 36px;
+
+    margin: 0;
+    padding: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.23);
+    border-radius: 9px;
+
+    background: rgba(255, 255, 255, 0.09);
+
+    color: rgba(255, 255, 255, 0.94);
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.2px;
+
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    transition:
+        border-color 0.15s ease,
+        background-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+#mov::before,
+#mov::after {
+    content: none;
+}
+
+#mov:active {
+    border-color: rgba(255, 255, 255, 0.34);
+    background: rgba(255, 255, 255, 0.17);
+
+    transform: scale(0.97);
+}
+
+
+/* =========================================
+   본문
+========================================= */
+
+#body,
+#body.meal-page {
+    container-type: inline-size;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    width: calc(100% - 28px);
+    max-width: var(--meal-content-max);
+
+    margin: 0 auto;
+
+    padding:
+        18px
+        0
+        calc(30px + env(safe-area-inset-bottom));
+}
+
+/* =========================================
+   월 이동 영역
+========================================= */
+
+#da,
+.month-navigation,
+.meal-date-navigation {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    align-items: center;
+    gap: 8px;
+
+    width: 100%;
+
+    height: 64px;
+    min-height: 64px;
+    max-height: 64px;
+
+    margin: 0;
+    padding: 0;
+}
+
+.meal-current-date {
+    min-width: 0;
+
+    text-align: center;
+}
+
+.meal-current-date > span {
+    display: block;
+
+    margin: 0 0 3px;
+    padding: 0;
+
+    color: var(--meal-text-light);
+
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.2px;
+}
+
+#dat {
+    min-width: 0;
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+
+    color: var(--meal-text);
+
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.7px;
+
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   이전·다음 날짜 버튼
+   44 × 44px 고정
+========================================= */
+
+#date1,
+#date2 {
+    position: static !important;
+    inset: auto !important;
+    float: none !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 1px solid var(--meal-line-strong) !important;
+    border-radius: 50% !important;
+
+    background: var(--meal-surface) !important;
+
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.018),
+        0 3px 9px rgba(0, 0, 0, 0.038) !important;
+
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    transition:
+        border-color 0.15s ease,
+        background-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+#date1:active,
+#date2:active {
+    background: var(--meal-surface-pressed) !important;
+
+    transform: scale(0.94);
+}
+
+#date1:focus-visible,
+#date2:focus-visible,
+#mov:focus-visible {
+    outline: 2px solid rgba(36, 36, 34, 0.24);
+    outline-offset: 2px;
+}
+
+
+/* 마우스가 있는 장치에서만 hover 적용 */
+
+@media (hover: hover) and (pointer: fine) {
+    #date1:hover,
+    #date2:hover {
+        border-color: #c9c9c4 !important;
+        background: #fafaf8 !important;
+    }
+
+    #mov:hover {
+        border-color: rgba(255, 255, 255, 0.32);
+        background: rgba(255, 255, 255, 0.14);
+    }
+}
+
+
+/* =========================================
+   SVG 화살표
+   24 × 24px 고정
+========================================= */
+
+#date1 svg,
+#date2 svg {
+    display: block;
+
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+
+    margin: 0;
+    padding: 0;
+
+    fill: none;
+    stroke: #353532;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    pointer-events: none;
+}
+
+
+/* 기존 span 화살표 구조도 지원 */
+
+.date-arrow {
+    display: block;
+
+    width: 12px;
+    height: 12px;
+
+    margin: 0;
+
+    border-top: 2px solid #353532;
+    border-right: 2px solid #353532;
+
+    pointer-events: none;
+}
+
+.date-arrow-left {
+    margin-left: 4px;
+
+    transform: rotate(-135deg);
+}
+
+.date-arrow-right {
+    margin-right: 4px;
+
+    transform: rotate(45deg);
+}
+
+
+/* =========================================
+   달력 카드
+
+   아래부터는 #body의 실제 너비를 기준으로
+   cqw 단위를 사용하므로 화면이 작아져도
+   모든 크기가 같은 비율로 축소됩니다.
+========================================= */
+
+.calendar-panel {
+    width: 100%;
+    overflow: hidden;
+
+    /*
+       기준 452px:
+       테두리 1px
+       둥근 모서리 15px
+    */
+    border: 0.2212cqw solid var(--meal-line);
+    border-radius: 3.3186cqw;
+
+    background: var(--meal-surface);
+
+    box-shadow:
+        0 0.2212cqw 0.4425cqw rgba(0, 0, 0, 0.018),
+        0 1.7699cqw 4.8673cqw rgba(0, 0, 0, 0.038);
+}
+
+
+/* =========================================
+   요일 영역
+========================================= */
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    width: 100%;
+
+    /*
+       기준 452px에서 1px 구분선
+    */
+    border-bottom: 0.2212cqw solid var(--meal-line-strong);
+
+    background: var(--meal-surface-soft);
+}
+
+.calendar-weekdays > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+
+    /*
+       기준 452px:
+       높이 40px
+       글자 12px
+    */
+    height: 8.8496cqw;
+
+    margin: 0;
+    padding: 0;
+
+    background: var(--meal-surface-soft);
+    color: var(--meal-text-sub);
+
+    font-size: 2.6549cqw;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.0442cqw;
+
+    text-align: center;
+}
+
+
+/* 요일 사이의 세로선 */
+
+.calendar-weekdays > div:not(:last-child) {
+    border-right: 0.2212cqw solid var(--meal-line-soft);
+}
+
+
+/* =========================================
+   달력 행
+========================================= */
+
+#calendarRows {
+    display: flex;
+    flex-direction: column;
+
+    /*
+       기준 452px에서 1px
+    */
+    gap: 0.2212cqw;
+
+    width: 100%;
+
+    background: var(--meal-line);
+}
+
+.calendar-row {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-auto-rows: auto;
+    align-items: stretch;
+
+    gap: 0.2212cqw;
+
+    width: 100%;
+
+    background: var(--meal-line);
+}
+
+
+/* =========================================
+   날짜 칸
+
+   기준 콘텐츠 폭 452px에서 높이 112px.
+   화면이 줄어들면 정확히 같은 비율로 축소되고,
+   메뉴 내용이 길면 행 높이가 자동으로 늘어납니다.
+========================================= */
+
+.calendar-cell {
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+
+    height: auto;
+
+    /*
+       112 ÷ 452 × 100
+    */
+    min-height: 24.7788cqw;
+
+    margin: 0;
+
+    /*
+       기준 452px:
+       위 5px
+       좌우 5px
+       아래 9px
+    */
+    padding:
+        1.1062cqw
+        1.1062cqw
+        1.9912cqw;
+
+    overflow: hidden;
+
+    background: var(--meal-surface);
+    color: #51514d;
+}
+
+
+/* =========================================
+   날짜 숫자
+========================================= */
+
+.day-number {
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    width: 100%;
+
+    /*
+       기준 452px에서 약 17px
+    */
+    min-height: 3.7611cqw;
+
+    /*
+       숫자 아래 간격 기준 4px
+    */
+    margin: 0 0 0.8850cqw;
+    padding: 0;
+
+    color: var(--meal-text);
+
+    /*
+       기준 452px에서 12.5px
+    */
+    font-size: 2.7655cqw;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.0332cqw;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* =========================================
+   급식 메뉴
+========================================= */
+
+.meal-list {
+    position: relative;
+    z-index: 1;
+
+    color: #51514d;
+
+    /*
+       기준 452px에서 10.8px
+    */
+    font-size: 2.3894cqw;
+    font-weight: 400;
+    line-height: 1.44;
+    letter-spacing: -0.0487cqw;
+
+    text-align: left;
+
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
+.meal-item {
+    display: block;
+
+    /*
+       기준 452px에서 1px
+    */
+    margin: 0 0 0.2212cqw;
+}
+
+.meal-item:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   현재 월 밖의 빈칸
+========================================= */
+
+.calendar-cell.is-empty {
+    background: var(--meal-page-bg);
+}
+
+
+/* =========================================
+   오늘 날짜 강조
+
+   배경색 + 날짜 숫자 옆 세로선.
+   숫자 자체의 위치는 이동하지 않습니다.
+========================================= */
+
+.calendar-cell.is-today {
+    background: #efefec;
+}
+
+.calendar-cell.is-today::before {
+    content: "";
+
+    position: absolute;
+
+    /*
+       기준 452px:
+       위 7px
+       왼쪽 1px
+       너비 2px
+       높이 13px
+    */
+    top: 1.5487cqw;
+    left: 0.2212cqw;
+
+    width: 0.4425cqw;
+    height: 2.8761cqw;
+
+    border-radius: 0.4425cqw;
+
+    background: var(--meal-dark);
+}
+
+.calendar-cell.is-today .day-number {
+    margin-left: 0;
+    padding-left: 0;
+
+    color: var(--meal-dark);
+    font-weight: 700;
+}
+
+
+
+
+/* =========================================
+   cqw 미지원 브라우저용 비례 대체
+
+   콘텐츠 폭이 화면의 90.4%이므로
+   동일한 비율의 vw 값으로 변환했습니다.
+========================================= */
+
+@supports not (width: 1cqw) {
+    .calendar-panel {
+        border-width: 0.2vw;
+        border-radius: 3vw;
+
+        box-shadow:
+            0 0.2vw 0.4vw rgba(0, 0, 0, 0.018),
+            0 1.6vw 4.4vw rgba(0, 0, 0, 0.038);
+    }
+
+    .calendar-weekdays {
+        border-bottom-width: 0.2vw;
+    }
+
+    .calendar-weekdays > div {
+        height: 8vw;
+
+        font-size: 2.4vw;
+        letter-spacing: -0.04vw;
+    }
+
+    .calendar-weekdays > div:not(:last-child) {
+        border-right-width: 0.2vw;
+    }
+
+    #calendarRows,
+    .calendar-row {
+        gap: 0.2vw;
+    }
+
+    .calendar-cell {
+        min-height: 22.4vw;
+
+        padding:
+            1vw
+            1vw
+            1.8vw;
+    }
+
+    .day-number {
+        min-height: 3.4vw;
+
+        margin-bottom: 0.8vw;
+
+        font-size: 2.5vw;
+        letter-spacing: -0.03vw;
+    }
+
+    .meal-list {
+        font-size: 2.16vw;
+        letter-spacing: -0.044vw;
+    }
+
+    .meal-item {
+        margin-bottom: 0.2vw;
+    }
+
+    .calendar-cell.is-today::before {
+        top: 1.4vw;
+        left: 0.2vw;
+
+        width: 0.4vw;
+        height: 2.6vw;
+
+        border-radius: 0.4vw;
+    }
+}
+.date-arrow-right {
+    margin-right: 4px;
+    transform: rotate(45deg);
+}
+
+.date-arrow {
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-top: 2px solid #353532;
+    border-right: 2px solid #353532;
+}
+
+.date-arrow-left {
+    margin-left: 4px;
+    transform: rotate(-135deg);
+}
+
+.meal-content,
+.calendar-panel {
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+}

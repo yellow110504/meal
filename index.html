@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#252525">
+    <meta property="og:image" content="icon.ico">
+    <meta
+        property="og:description"
+        content="구로중학교에 대한 다양한 정보들을 만나 보세요"
+    >
+
+    <link
+        rel="shortcut icon"
+        type="image/x-icon"
+        href="icon.ico"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="meal.css?6">
+
+    <script src="meal.js?6"></script>
+
+    <title>급식</title>
+</head>
+
+<body>
+
+<div class="background meal-screen">
+
+    <header class="meal-appbar">
+        <div class="meal-appbar-inner">
+            <h1>급식</h1>
+
+      <a href="./mealmonth.html" id="mov">월간</a>
+        </div>
+    </header>
+
+    <main id="body" class="meal-page">
+
+        <section class="meal-date-navigation">
+
+<button
+    type="button"
+    id="date1"
+    onclick="setminus()"
+    aria-label="이전 날짜"
+>
+    <span class="date-arrow date-arrow-left"></span>
+</button>
+
+<div class="meal-current-date">
+    <span>급식 날짜</span>
+    <div id="dat">날짜를 불러오는 중입니다.</div>
+</div>
+
+<button
+    type="button"
+    id="date2"
+    onclick="setdate()"
+    aria-label="다음 날짜"
+>
+    <span class="date-arrow date-arrow-right"></span>
+</button>
+
+        </section>
+
+        <section class="meal-content">
+
+            <div class="meal-content-header">
+                <h2>오늘의 급식</h2>
+            </div>
+
+            <div id="container">
+                급식 정보를 불러오는 중입니다.
+            </div>
+
+        </section>
+
+        <section id="set" class="meal-date-picker">
+
+            <label for="date">
+                다른 날짜 보기
+            </label>
+
+            <input
+                type="date"
+                id="date"
+                max="9999-12-31"
+                onchange="setdates()"
+            >
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="meal.js?1"></script>
+
+<script>
+    document.querySelector("#dat").textContent =
+        String(year) + "년 " +
+        String(month) + "월 " +
+        String(date) + "일";
+
+    document.querySelector("#date").value =
+        String(year) + "-" +
+        String(month).padStart(2, "0") + "-" +
+        String(date).padStart(2, "0");
+</script>
+
+<script src="cookie.js"></script>
+
+</body>
+</html>
